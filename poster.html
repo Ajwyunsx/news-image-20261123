@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The World Ledger — Monday, 23 November 2026</title>
+<!--
+  Visual reference: the Financial Times (salmon-tinted newsprint, hairline column rules,
+  small-caps kickers, one restrained accent). Masthead, grid and copy are original.
+  All assets inline; type set in Liberation Serif / Liberation Sans Narrow so it renders
+  identically on any machine without network fonts.
+-->
+<style>
+  @page { size: 1024px 1024px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1024px; height: 1024px; overflow: hidden;
+    background: #f7ecdc;
+    color: #16120e;
+    font-family: 'Liberation Serif', Georgia, 'Times New Roman', serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .narrow { font-family: 'Liberation Sans Narrow', 'Arial Narrow', Arial, sans-serif; }
+  #page {
+    position: relative; width: 1024px; height: 1024px;
+    padding: 14px 26px 10px 26px;
+    display: flex; flex-direction: column;
+    background-image:
+      radial-gradient(ellipse at 12% 6%, rgba(150,116,66,0.10), transparent 55%),
+      radial-gradient(ellipse at 88% 92%, rgba(150,116,66,0.09), transparent 55%);
+  }
+
+  /* ── top strip ───────────────────────────────────────────── */
+  .strip {
+    display: flex; justify-content: space-between; align-items: center;
+    height: 17px; flex: 0 0 17px;
+    font-size: 8.2px; letter-spacing: 0.185em; text-transform: uppercase;
+    border-bottom: 1px solid #16120e;
+    padding-bottom: 3px;
+    color: #3b332a;
+  }
+  .strip b { font-weight: 700; letter-spacing: 0.16em; color: #16120e; }
+
+  /* ── masthead ────────────────────────────────────────────── */
+  .masthead {
+    flex: 0 0 84px; height: 84px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 0.5px solid #16120e;
+  }
+  .mast-left { display: flex; align-items: baseline; gap: 14px; }
+  .masthead h1 {
+    font-family: 'Liberation Serif', Georgia, serif;
+    font-weight: 700; font-size: 66px; line-height: 0.92;
+    letter-spacing: -0.02em; white-space: nowrap;
+  }
+  .mast-rule { width: 1px; height: 40px; background: #16120e; opacity: .45; }
+  .mast-sub {
+    font-size: 8.4px; letter-spacing: 0.19em; text-transform: uppercase;
+    line-height: 1.7; color: #3b332a; max-width: 168px;
+  }
+  .mast-right { text-align: right; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.65; color: #3b332a; }
+  .mast-right .price { font-size: 13px; letter-spacing: 0.04em; font-weight: 700; color: #16120e; font-family: 'Liberation Serif', serif; }
+
+  /* ── date band ───────────────────────────────────────────── */
+  .dateband {
+    flex: 0 0 42px; height: 42px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 2.5px solid #16120e;
+    background: linear-gradient(to bottom, rgba(15,92,107,0.055), rgba(15,92,107,0.0));
+  }
+  .dateband .date {
+    font-size: 22.5px; letter-spacing: 0.055em; text-transform: uppercase;
+    font-weight: 700; color: #0f5c6b;
+  }
+  .dateband .date span { color: #16120e; font-weight: 400; letter-spacing: 0.02em; text-transform: none; font-size: 13px; }
+  .dateband .ed { font-size: 8.4px; letter-spacing: 0.2em; text-transform: uppercase; color: #3b332a; }
+
+  /* ── lead ────────────────────────────────────────────────── */
+  .lead { flex: 0 0 340px; display: flex; gap: 16px; padding: 12px 0 10px 0; border-bottom: 1px solid #16120e; }
+  .lead-main { flex: 1 1 68%; display: flex; flex-direction: column; padding-right: 15px; border-right: 0.6px solid #16120e; }
+  .kicker {
+    font-size: 8.6px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: #0f5c6b; font-weight: 700; margin-bottom: 5px;
+  }
+  .lead h2 {
+    font-size: 49px; line-height: 0.99; letter-spacing: -0.017em; font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .lead h2 em { font-style: italic; }
+  .deck {
+    font-size: 14.6px; line-height: 1.32; color: #2e2820; font-style: italic;
+    margin-bottom: 8px; padding-bottom: 7px; border-bottom: 0.6px solid rgba(22,18,14,.32);
+  }
+  .lead-cols { column-count: 2; column-gap: 15px; font-size: 10.5px; line-height: 1.5; text-align: justify; hyphens: auto; }
+  .lead-cols p { margin-bottom: 5px; }
+  .lead-cols p:first-child::first-letter {
+    float: left; font-size: 30px; line-height: 0.82; padding: 2px 5px 0 0; font-weight: 700; color: #0f5c6b;
+  }
+  .lead-cols .sub { font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 8.4px; color: #0f5c6b; }
+
+  /* lead side rail */
+  .lead-rail { flex: 0 0 196px; display: flex; flex-direction: column; gap: 0; }
+  .stats { border: 1px solid #16120e; padding: 8px 9px 9px; margin-bottom: 9px; background: rgba(255,255,255,.30); }
+  .stats .cap { font-size: 7.6px; letter-spacing: 0.2em; text-transform: uppercase; color: #0f5c6b; font-weight: 700; margin-bottom: 5px; }
+  .stats .num { font-size: 30px; line-height: 1; font-weight: 700; letter-spacing: -0.02em; }
+  .stats .lbl { font-size: 8.4px; line-height: 1.35; color: #3b332a; margin-top: 3px; }
+  .stats .row { display: flex; justify-content: space-between; font-size: 8.6px; padding: 3px 0; border-top: 0.5px solid rgba(22,18,14,.25); }
+  .stats .row:first-of-type { border-top: 0; }
+  .stats .row b { font-weight: 700; }
+
+  .ticker { border-top: 1px solid #16120e; padding-top: 6px; margin-bottom: 8px; }
+  .ticker .cap { font-size: 7.6px; letter-spacing: 0.2em; text-transform: uppercase; color: #0f5c6b; font-weight: 700; margin-bottom: 4px; }
+  .ticker .trow { display: flex; justify-content: space-between; font-size: 8.8px; padding: 2.5px 0; border-bottom: 0.5px dotted rgba(22,18,14,.28); }
+  .ticker .trow:last-child { border-bottom: 0; }
+  .ticker .trow b { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .ticker .up { color: #1c6b3a; }
+  .ticker .dn { color: #8d2b1c; }
+  .side-story { border-top: 1px solid #16120e; padding-top: 6px; }
+  .side-story h3 { font-size: 15.4px; line-height: 1.1; letter-spacing: -0.01em; margin: 3px 0 4px; }
+  .side-story p { font-size: 8.9px; line-height: 1.4; color: #2e2820; }
+
+  /* ── second row ──────────────────────────────────────────── */
+  .row2 { flex: 0 0 280px; display: flex; padding: 10px 0 8px; border-bottom: 1px solid #16120e; }
+  .story { padding: 0 14px; border-right: 0.6px solid #16120e; display: flex; flex-direction: column; }
+  .story:first-child { padding-left: 0; }
+  .story:last-child { border-right: 0; padding-right: 0; }
+  .story h3 { font-size: 22px; line-height: 1.06; letter-spacing: -0.012em; margin: 4px 0 5px; }
+  .story .body { font-size: 10.3px; line-height: 1.47; text-align: justify; hyphens: auto; color: #241f19; }
+  .story .body p { margin-bottom: 4px; }
+  .story .body p::first-letter { font-weight: 700; }
+  .story .pull {
+    margin-top: 6px; padding-top: 6px; border-top: 0.6px solid rgba(22,18,14,.3);
+    font-size: 10.4px; line-height: 1.3; font-style: italic; color: #0f5c6b;
+  }
+  .story .pull span { display: block; font-style: normal; font-size: 7.4px; letter-spacing: 0.14em; text-transform: uppercase; color: #6d6357; margin-top: 3px; }
+  .story .src { margin-top: auto; padding-top: 5px; font-size: 7.5px; letter-spacing: 0.13em; text-transform: uppercase; color: #6d6357; }
+
+  /* ── briefs ──────────────────────────────────────────────── */
+  .briefs { flex: 1 1 auto; display: flex; gap: 0; padding: 8px 0 3px; overflow: hidden; }
+  .brief { flex: 1 1 0; padding: 0 13px; border-right: 0.6px solid rgba(22,18,14,.5); display: flex; flex-direction: column; }
+  .brief:first-child { padding-left: 0; }
+  .brief:last-child { border-right: 0; padding-right: 0; }
+  .brief .tag { font-size: 7.4px; letter-spacing: 0.2em; text-transform: uppercase; color: #0f5c6b; font-weight: 700; margin-bottom: 3px; }
+  .brief h4 { font-size: 13.8px; line-height: 1.1; margin-bottom: 4px; letter-spacing: -0.005em; }
+  .brief p { font-size: 9.2px; line-height: 1.44; color: #2e2820; margin-bottom: 4px; }
+
+  /* ── footer ──────────────────────────────────────────────── */
+  .foot {
+    flex: 0 0 15px; display: flex; justify-content: space-between; align-items: flex-end;
+    border-top: 2px solid #16120e; padding-top: 3px;
+    font-size: 7.3px; letter-spacing: 0.17em; text-transform: uppercase; color: #4a4137;
+  }
+</style>
+</head>
+<body>
+<div id="page">
+
+  <div class="strip narrow">
+    <div><b>World Ledger</b> &nbsp;·&nbsp; Global edition</div>
+    <div>Compiled in Singapore · 21:00 SGT</div>
+    <div>Monday, 23 November 2026 · No. 4,118</div>
+  </div>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <h1>The World Ledger</h1>
+      <div class="mast-rule"></div>
+      <div class="mast-sub narrow">Independent reporting<br>on a world in motion<br>since 1904</div>
+    </div>
+    <div class="mast-right narrow">
+      <div class="price">US$4.50</div>
+      <div>Asia · Europe · Americas</div>
+      <div>thirty-two pages</div>
+    </div>
+  </div>
+
+  <div class="dateband">
+    <div class="date narrow">Monday, November 23, 2026 <span>— late city edition</span></div>
+    <div class="ed narrow">Antalya · Washington · Benghazi · Darmstadt</div>
+  </div>
+
+  <!-- ── LEAD ─────────────────────────────────────────── -->
+  <div class="lead">
+    <div class="lead-main">
+      <div class="kicker narrow">Climate diplomacy · Antalya</div>
+      <h2>Climate pact collapses in Antalya as the gavel falls</h2>
+      <div class="deck">COP31 closed on Sunday night with no pact at all. Nearly 200 countries could not agree to name the fossil fuels warming the planet — and left the money for adapting to it on the table.</div>
+      <div class="lead-cols">
+        <p>The UN climate summit that was meant to end on Friday ended, at last, on Sunday evening — 49 hours late, and with nothing to sign. COP31 president Murat Kurum brought down the gavel on the Antalya Pact after the final plenary made plain that consensus did not exist.</p>
+        <p>Two questions broke the room. Whether the text should name coal, oil and gas as the causes of warming, which the European Union demanded and oil producers refused; and whether rich countries would commit to $120bn a year for adaptation, a figure that vanished from the final draft. Britain and Panama joined the objections.</p>
+        <p class="sub">The first collapse since Copenhagen</p>
+        <p>It is the first failure of a UN climate conference since Copenhagen in 2009, and the longest COP ever held. “It certainly fell short today,” said the UN's climate chief, Simon Stiell. “The world cannot afford a repeat.”</p>
+        <p>The Turkish presidency pointed to its action agenda and side deals as consolation. Few delegates in the hall treated them as such. With energy prices up sharply and the Iran war absorbing diplomatic attention, several delegations said the process itself now needs reform.</p>
+        <p class="sub">Talks move outside the tent</p>
+        <p>Frustrated by the inertia, a group of states said they would press ahead outside the COP process, with a coalition of the willing on electrification and a separate push on methane. Australia's climate minister, Chris Bowen, called the backdrop “the most complicated and fraught geopolitical environment in living memory”.</p>
+        <p>For the poorest delegations the arithmetic is blunter. The adaptation finance figure that disappeared from the text was the one line their capitals had come to Antalya to secure, and it will not be restored before the next conference, in 2027. Whether it hardens into a decade-long rout, as Copenhagen did, is now the question in every delegation.</p>
+      </div>
+    </div>
+
+    <div class="lead-rail">
+      <div class="stats">
+        <div class="cap narrow">The summit in numbers</div>
+        <div class="num">49<span style="font-size:15px"> hrs</span></div>
+        <div class="lbl">past its scheduled close — the longest COP on record</div>
+        <div class="row"><span>Countries at the table</span><b>196 + EU</b></div>
+        <div class="row"><span>Adaptation target cut</span><b>$120bn/yr</b></div>
+        <div class="row"><span>Pact adopted</span><b>None</b></div>
+      </div>
+      <div class="ticker">
+        <div class="cap narrow">Markets · the numbers</div>
+        <div class="trow"><span>S&amp;P 500, Friday</span><b class="dn">−3.7%</b></div>
+        <div class="trow"><span>Nasdaq, Friday</span><b class="dn">−5.3%</b></div>
+        <div class="trow"><span>Kospi, session low</span><b class="dn">−6%</b></div>
+        <div class="trow"><span>Gold, Monday</span><b class="up">+2%</b></div>
+      </div>
+      <div class="side-story">
+        <div class="kicker narrow">Middle East</div>
+        <h3>Trump holds out the threat of new strikes on Iran</h3>
+        <p>In a Fox News interview aired on Sunday, the president said he was inclined to resume major strikes after the New Year if talks fail, calling Iranian negotiators “professional tap dancers”. Qatar is carrying messages between the sides.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ROW 2 ────────────────────────────────────────── -->
+  <div class="row2">
+    <div class="story" style="flex:1 1 33%">
+      <div class="kicker narrow">United States</div>
+      <h3>Democrats take 258 seats, their widest majority since 1992</h3>
+      <div class="body">
+        <p>A recount in North Carolina's fifth district gave Democrat Chuck Hubbard a 330-vote win over Republican Virginia Foxx, networks projected on Sunday, lifting his party to at least 258 House seats. Democrats gained 44 seats and hold the Senate.</p>
+        <p>Hakeem Jeffries is set to become the first Black speaker. Four races remain uncalled.</p>
+        <p>Party strategists describe the result as a backlash against the cost of living, not a mandate for any single programme. Democrats are preparing a 100-day agenda and a broad oversight schedule for the president's remaining two years.</p>
+      </div>
+      <div class="pull narrow">“The largest majority any party in Congress has held this century.”<span>Hakeem Jeffries, House Democratic leader</span></div>
+      <div class="src narrow">Source: AP · BBC · 22–23 Nov</div>
+    </div>
+
+    <div class="story" style="flex:1 1 34%">
+      <div class="kicker narrow">Space · Mercury</div>
+      <h3>BepiColombo reaches Mercury, but its engine falters</h3>
+      <div class="body">
+        <p>Eight years and nine flybys after launch, the European–Japanese probe was captured by Mercury's gravity. Then ESA disclosed that a software problem had cut the braking burn short: “The thruster burn was shorter than planned,” it said.</p>
+        <p>The two orbiters separate on 9 December; science begins in April 2027. It is Europe's first mission to the planet, and carries Japan's first Mercury orbiter.</p>
+        <p>Controllers at ESOC in Darmstadt spent Monday reviewing telemetry. A slightly low orbit costs fuel the mission can ill spare.</p>
+      </div>
+      <div class="pull narrow">“The thruster burn was shorter than planned.”<span>European Space Agency, on the Mercury arrival</span></div>
+      <div class="src narrow">Source: Reuters · ESA · 22–23 Nov</div>
+    </div>
+
+    <div class="story" style="flex:1 1 33%">
+      <div class="kicker narrow">Africa · Libya</div>
+      <h3>Drone strike sinks a Russian warship in Benghazi</h3>
+      <div class="body">
+        <p>The corvette Merkury was hit before dawn on Sunday while refuelling at Benghazi naval base and left partly submerged; ten Russians and Libyans were lightly hurt. Ukraine's president said Ukrainian forces were responsible.</p>
+        <p>On Monday the UN mission in Libya demanded an independent inquiry, warning the country “must not become a battleground for foreign conflicts”.</p>
+        <p>Benghazi's administration, aligned with Marshal Haftar, said it had opened a joint investigation with Moscow and would seek compensation.</p>
+      </div>
+      <div class="pull narrow">“Libya cannot afford, and must not become, a battleground for foreign conflicts.”<span>UN Support Mission in Libya</span></div>
+      <div class="src narrow">Source: Arab News · NPR · 23 Nov</div>
+    </div>
+  </div>
+
+  <!-- ── BRIEFS ───────────────────────────────────────── -->
+  <div class="briefs">
+    <div class="brief">
+      <div class="tag narrow">Markets</div>
+      <h4>Wall Street steadies itself for a relief rally</h4>
+      <p>Futures rose 2–3% in Asian hours after the S&amp;P 500's seventh straight fall. Seoul's Kospi sank nearly 6% before recovering; gold gained 2%.</p>
+    </div>
+    <div class="brief">
+      <div class="tag narrow">Asia · Power Index</div>
+      <h4>India keeps third place as the US–China gap narrows</h4>
+      <p>The Lowy Institute scored America 78.9 and China 73.6 — a 5.3-point lead, the smallest since 2018. India held third on 40.5, ahead of Japan and Russia, on gains in defence sales and cultural reach.</p>
+    </div>
+    <div class="brief">
+      <div class="tag narrow">Sport · Cricket</div>
+      <h4>New Zealand stonewall India to a draw in Wellington</h4>
+      <p>Daryl Mitchell and Glenn Phillips batted out the final day after India declared 352 ahead. New Zealand drop out of the Test Championship's top two; Australia join South Africa there. India stay fourth.</p>
+    </div>
+    <div class="brief">
+      <div class="tag narrow">Culture · Indonesia</div>
+      <h4>Jakarta's film awards turn into a protest</h4>
+      <p>Winners at the Indonesian Film Festival used their speeches to attack the government. The culture ministry said on Monday it was disappointed the ceremony, the country's most prominent film prize, had been politicised.</p>
+    </div>
+  </div>
+
+  <div class="foot narrow">
+    <div>The World Ledger · Monday, 23 November 2026</div>
+    <div>Reporting from Antalya, Washington, Benghazi, Darmstadt, Wellington and Jakarta</div>
+    <div>Page one of thirty-two</div>
+  </div>
+
+</div>
+</body>
+</html>
